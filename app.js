@@ -3,7 +3,12 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
-
+const Downloader = require('nodejs-file-downloader');
+// const ipfs = new ipfsClient({
+//     host: 'ipfs.infuro.io',
+//     port: '5001',
+//     protocol: 'https',
+// })
 const ipfs = new ipfsClient({
     host: 'localhost',
     port: '5001',
@@ -33,15 +38,28 @@ app.post("/upload", (req, res) => {
             return res.status(500).json({ err });
         }
         const fileHash = await addFile({ fileName, filePath });
-        fs.unlink(filePath, (err) => {
+
+        fs.unlink(filePath, async (err) => {
             if (err) {
                 console.log(err);
             }
+
+            // const downloader = new Downloader({
+            //     url: 'https://ipfs.io/ipfs/' + fileHash,//If the file name already exists, a new file with the name 200MB1.zip is created.     
+            //     directory: "./downloads",//This folder will be created, if it doesn't exist.               
+            // })
+            // console.log(downloader);
+
             res.render('upload', { fileName, fileHash });
+
+            // await downloader.save();//Downloader.download() returns a promise
+
+
         })
     })
 
 });
+
 
 const addFile = async ({ fileName, filePath }) => {
     const file = fs.readFileSync(filePath);

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
-    "ipfs-http-client": "^47.0.1"
+    "ipfs-http-client": "^47.0.1",
+    "nodejs-file-downloader": "^2.1.1"
   }
 }
